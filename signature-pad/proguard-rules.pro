@@ -113,6 +113,6 @@
 #    public void set*(...);
 #}
 
--keepattributes Signature
+-keepattributes SignaturePad
 -keepattributes EnclosingMethod
 -keepattributes *Annotation*

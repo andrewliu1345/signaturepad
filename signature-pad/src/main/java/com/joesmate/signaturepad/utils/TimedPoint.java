@@ -4,7 +4,7 @@ public class TimedPoint {
     public float x;
     public float y;
     public float w;
-    public int a;
+    public int a=0;//时间戳
     public long timestamp;
 
     public TimedPoint set(float x, float y) {
@@ -18,7 +18,7 @@ public class TimedPoint {
         this.x = x;
         this.y = y;
         this.w = w;
-        //this.timestamp = System.currentTimeMillis();
+        this.timestamp = System.currentTimeMillis();
         return this;
     }
 
@@ -27,7 +27,7 @@ public class TimedPoint {
         this.y = y;
         this.w = w;
         this.a = a;
-        //this.timestamp = System.currentTimeMillis();
+        this.timestamp = System.currentTimeMillis();
         return this;
     }
 

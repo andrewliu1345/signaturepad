@@ -1,26 +1,33 @@
 apply plugin: 'com.android.library'
 //apply plugin: 'com.github.dcendents.android-maven'
 //apply plugin: 'com.jfrog.bintray'
-
 //dependencies {
 //}
 //
 //Properties properties = new Properties()
 //final def bintrayPropertiesFile = project.rootProject.file('bintray.properties')
 //if (bintrayPropertiesFile.exists()) properties.load(bintrayPropertiesFile.newDataInputStream())
-
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 26
+    buildToolsVersion '27.0.1'
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 26
     }
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '27.0.1'
     productFlavors {
     }
-}
+    buildTypes {
+        release {
+            minifyEnabled true
 
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            jniDebuggable true
+        }
+    }
+}
 //bintray {
 //    user = properties.getProperty("bintray.user")
 //    key = properties.getProperty("bintray.apikey")
@@ -49,7 +56,6 @@ android {
 //        }
 //    }
 //}
-
 //install {
 //    repositories.mavenInstaller {
 //        // This generates POM.xml with proper parameters
@@ -85,7 +91,6 @@ android {
 //        }
 //    }
 //}
-
 //task sourcesJar(type: Jar) {
 //    from android.sourceSets.main.java.srcDirs
 //    classifier = 'sources'
@@ -105,3 +110,6 @@ android {
 //    archives javadocJar
 //    archives sourcesJar
 //}
+
+dependencies {
+}

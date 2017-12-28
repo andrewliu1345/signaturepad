@@ -7,4 +7,19 @@
 package com.joesmate.signaturepad;
 
 public final class R {
+    public static final class attr {
+        public static int clearOnDoubleClick = 0x7f040001;
+        public static int maxWidth = 0x7f040002;
+        public static int minWidth = 0x7f040003;
+        public static int penColor = 0x7f040004;
+        public static int velocityFilterWeight = 0x7f040005;
+    }
+    public static final class styleable {
+        public static int[] SignaturePad = { 0x7f040001, 0x7f040002, 0x7f040003, 0x7f040004, 0x7f040005 };
+        public static int SignaturePad_clearOnDoubleClick = 0;
+        public static int SignaturePad_maxWidth = 1;
+        public static int SignaturePad_minWidth = 2;
+        public static int SignaturePad_penColor = 3;
+        public static int SignaturePad_velocityFilterWeight = 4;
+    }
 }

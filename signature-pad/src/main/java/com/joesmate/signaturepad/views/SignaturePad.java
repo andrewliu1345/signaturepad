@@ -72,9 +72,9 @@ public class SignaturePad extends View {
     private Bitmap mSignatureBitmap = null;
     private Canvas mSignatureBitmapCanvas = null;
 
-    public SignaturePad(Context context) {
-        super(context);
-    }
+//    public SignaturePad(Context context) {
+//        super(context);
+//    }
 
     public SignaturePad(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -236,7 +236,9 @@ public class SignaturePad extends View {
                 mLastTouchX = eventX;
                 mLastTouchY = eventY;
                 resetDirtyRect(eventX, eventY);
+
                 tmpPoint = getNewPoint(eventX, eventY, eventW);
+//                tmpPoint = getNewPoint(eventX, eventY, eventW);
                 Log.i("ACTION_DOWN 压力", String.format("Pressure：%f", eventW));
                 addPoint(tmpPoint);
                 painMun++;
@@ -251,7 +253,10 @@ public class SignaturePad extends View {
 //                if (n < 0.7f)
 //                    eventW = (tmpPoint.w-mMinWidth)*0.2f/50;
                 eventW = (1 - 0.55f) * eventW + 0.55f * tmpPoint.w;
-                tmpPoint = getNewPoint(eventX, eventY, eventW);
+                long a = System.currentTimeMillis() - tmpPoint.timestamp;
+                tmpPoint = getNewPoint(eventX, eventY, eventW, (int) a);
+
+                //tmpPoint = getNewPoint(eventX, eventY, eventW);
                 Log.i("ACTION_MOVE 压力", String.format("Pressure：%f", eventW));
                 addPoint(tmpPoint);
                 painMun++;
@@ -601,17 +606,21 @@ public class SignaturePad extends View {
         float x = curve.startPoint.x;
         float y = curve.startPoint.y;
         float w = curve.startPoint.w;
-
+        int a = curve.startPoint.a;
+        long ts = curve.startPoint.timestamp;//开始时间挫
+        long te = curve.endPoint.timestamp;//结束时间挫
+        long td = te - ts;
 
         Log.i("drawSteps：", "" + drawSteps);
         if (drawSteps == 0) {
             mPaint.setStrokeWidth(w);
             mSignatureBitmapCanvas.drawPoint(x, y, mPaint);
 
-            this.mLineData.add(new float[]{x, y, w});
-
+           // this.mLineData.add(new float[]{x, y, w});
+            this.mLineData.add(new float[]{x, y, w,a});
 
         } else {
+            int av = (int) td / drawSteps;
             for (int i = 0; i < drawSteps; i++) {
                 // Calculate the Bezier (x, y) coordinate for this step.
                 float t = ((float) i) / drawSteps;
@@ -646,9 +655,9 @@ public class SignaturePad extends View {
                 mSignatureBitmapCanvas.drawPoint(x, y, mPaint);
 
 
-                this.mLineData.add(new float[]{x, y, w});
+                //this.mLineData.add(new float[]{x, y, w});
 
-
+                this.mLineData.add(new float[]{x, y, w,av});
             }
 
         }

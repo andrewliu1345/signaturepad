@@ -1,14 +1,18 @@
 package com.joesmate.signaturepad;
 
 import android.content.Context;
+import android.util.Log;
 
 /**
  * Created by andre on 2017/4/18 .
  */
 
 public class MResource {
+    static final String TAG = MResource.class.getName();
+
     public static int getIdByName(Context context, String className, String name) {
-        String packageName = context.getPackageName();
+        String packageName = context.getApplicationContext().getPackageName();
+        Log.d(TAG, packageName);
         Class r = null;
         int id = 0;
         try {
@@ -43,6 +47,7 @@ public class MResource {
 
     public static int[] getIdsByName(Context context, String className, String name) {
         String packageName = context.getPackageName();
+        Log.d(TAG, packageName);
         Class r = null;
         int[] ids = null;
         try {
